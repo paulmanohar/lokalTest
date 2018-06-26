@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="10dp"
+    android:background="@color/colorAccent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+
+        android:padding="8dp">
+        <ImageView
+            android:src="@drawable/ic_image_black_24dp"
+            android:id="@+id/image"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@id/image"
+            android:id="@+id/file_name"
+            android:paddingLeft="5dp"
+            android:layout_margin="5dp"
+            android:textSize="16sp"
+            tools:ignore="RtlCompat"
+            android:layout_toEndOf="@id/image" />
+
+        <Button
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:id="@+id/download_button"
+            android:layout_alignParentRight="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_file_download_black_24dp"
+            android:layout_alignParentEnd="true"
+             />
+    </RelativeLayout>
+
+
+
+</android.support.v7.widget.CardView>
