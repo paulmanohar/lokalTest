@@ -12,7 +12,7 @@ public class Log {
 		android.util.Log.i(name, value);
 	}
 	
-	public static void e(String name, String value, RemoteException e) {
+	public static void e(String name, String value) {
 		android.util.Log.e(name, value);
 	}
 	

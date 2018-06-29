@@ -1,32 +1,26 @@
-package com.lokal.lokaltest.activity;
+package com.lokal.lokaltest.view.activity;
 
 import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.Cursor;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.lokal.lokaltest.R;
 import com.lokal.lokaltest.adapter.ShowImageAdapter;
 import com.lokal.lokaltest.adapter.listener.BaseRecyclerAdapterListener;
 import com.lokal.lokaltest.library.Log;
 import com.lokal.lokaltest.model.DownloadImageModel;
-import com.lokal.lokaltest.model.ImageModel;
+import com.lokal.lokaltest.model.ShowImageModel;
 import com.lokal.lokaltest.model.listener.IBaseModelListener;
 import com.lokal.lokaltest.model.response.ImageResponse;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.ResponseBody;
 
 /**
  * Created by ADMIN on 26-06-2018.
@@ -36,8 +30,8 @@ public class DownloadActivity extends AppCompatActivity {
 
 
     private RecyclerView imageListRecyclerView;
+    private ShowImageModel showImageModel;
     private ShowImageAdapter showImageAdapter;
-    private ImageModel imageModel;
     private DownloadImageModel downloadImageModel;
     List<ImageResponse> imageListResponses = new ArrayList<>();
     private DownloadManager downloadManager;
@@ -92,8 +86,8 @@ public class DownloadActivity extends AppCompatActivity {
 //
 //        registerReceiver(receiver, new IntentFilter(
 //                DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-        this.downloadImageModel = new DownloadImageModel(getFilesDir().toString());
-        this.imageModel = new ImageModel(new IBaseModelListener<List<ImageResponse>>() {
+//        this.downloadImageModel = new DownloadImageModel(getFilesDir().toString());
+        this.showImageModel = new ShowImageModel(new IBaseModelListener<List<ImageResponse>>() {
             @Override
             public void onSuccessfulApi(long taskId, List<ImageResponse> response) {
                 Log.d("length1", String.valueOf(response.size()));
@@ -102,9 +96,12 @@ public class DownloadActivity extends AppCompatActivity {
                     showImageAdapter = new ShowImageAdapter(imageListResponses, new BaseRecyclerAdapterListener<ImageResponse>() {
                         @Override
                         public void onClickItem(int position, ImageResponse data) {
+//                            Toast.makeText(getBaseContext(),data.getPostUrl()+"/download",Toast.LENGTH_SHORT).show();
                             Uri uri = Uri.parse(data.getPostUrl()+"/download");
                             DownloadManager.Request request = new DownloadManager.Request(uri);
                             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                            request.setTitle("Downloading "+data.getFilename());
+//                            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"/PicSum");
                             enqueue = downloadManager.enqueue(request);
                         }
                     });
@@ -121,7 +118,7 @@ public class DownloadActivity extends AppCompatActivity {
             }
         });
 
-        imageModel.getImagesList();
+        showImageModel.getImagesList();
 
     }
 }

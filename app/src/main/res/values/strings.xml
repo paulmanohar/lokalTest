@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">LokalTest</string>
+    <string name="error_no_network_found">No Network Connection</string>
+    <string name="action_settings">Action Settings</string>
+    <string name="network_wifi">Wifi Network</string>
+    <string name="network_mobile">Mobile Network</string>
 </resources>
